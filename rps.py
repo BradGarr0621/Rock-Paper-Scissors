@@ -1,6 +1,7 @@
 import random
 
 wins = 0
+losses = 0
 
 def bothChoices(choice, userGuess):
     print(f'Your choice: {userGuess}')
@@ -11,46 +12,44 @@ def gameplay():
     userGuess = input('Choose rock, paper, or scissors: ')
     print()
     global wins
+    global losses
     #prints if you won, lost, or had a draw and also returns number to calculate total score
     if userGuess == 'rock':
         if choice == 'rock':
             bothChoices(choice, userGuess)
             print('Draw!')
-            wins = wins
         elif choice == 'paper':
             bothChoices(choice, userGuess)
             print('You lost!')
-            wins = wins - 1
+            losses += 1
         else:
             bothChoices(choice, userGuess)
             print('You won!')
-            wins = wins + 1
+            wins += 1
     elif userGuess == 'paper':
         if choice == 'rock':
             bothChoices(choice, userGuess)
             print('You won!')
-            wins = wins + 1
+            wins += 1
         elif choice == 'paper':
             bothChoices(choice, userGuess)
             print('Draw!')
-            wins = wins
         else:
             bothChoices(choice, userGuess)
             print('You lost!')
-            wins = wins - 1
+            losses += 1
     elif userGuess == 'scissors':
         if choice == 'rock':
             bothChoices(choice, userGuess)
             print('You lost!')
-            wins = wins - 1
+            losses += 1
         elif choice == 'paper':
             bothChoices(choice, userGuess)
             print('You won!')
-            wins = wins + 1
+            wins += 1
         else:
             bothChoices(choice, userGuess)
             print('Draw!')
-            wins = wins
     else:
         print('Invalid input.')
 
@@ -58,13 +57,14 @@ def gameplay():
 games = int(input('How many games would you like to play?: '))
 for i in range(games):
     gameplay()
-    print('You have ' + str(wins) + ' wins.')
+    print(f'You have {wins} wins.')
+    print(f'You have {losses} losses.')
     print()
 
 #end result
-if wins > 0:
+if wins > losses:
     print('You won the match!')
-elif wins < 0:
+elif wins < losses:
     print('You lost the match!')
 else:
     print('You tied the match!')
